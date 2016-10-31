@@ -98,6 +98,7 @@ namespace Task_WEB.Controllers
                 {
                     Name = commentModel.Name,
                     Body = commentModel.Body,
+                  //  ParentId = _gameStoreService. commentModel.ParentName// добавить обработку через ID
                     ParentName = commentModel.ParentName,
                     GameId = commentModel.GameId
                 };
