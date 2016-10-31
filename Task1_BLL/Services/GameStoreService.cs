@@ -28,7 +28,7 @@ namespace Task1_BLL.Services
                 Body = commentDTO.Body,
                 GameId = commentDTO.GameId,
                 ParentName = commentDTO.ParentName,
-                ParentId =GetComments().FirstOrDefault(c=>c.Name==commentDTO.ParentName)?.Id,
+                ParentId = GetComments().FirstOrDefault(c => c.Name == commentDTO.ParentName)?.Id,
 
             };
             _database.Comment.Create(comment);

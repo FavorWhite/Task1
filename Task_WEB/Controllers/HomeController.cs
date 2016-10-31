@@ -81,7 +81,7 @@ namespace Task_WEB.Controllers
         // GET: Home/DownloadGame/{key}
         public FileResult DownloadGame(string gameKey)
         {
-            if (_gameStoreService.GetGameByKey(gameKey)!=null)
+            if (_gameStoreService.GetGameByKey(gameKey) != null)
             {
                 string file_path = Server.MapPath("~/Files/" + gameKey + ".txt");
                 string file_type = "application/txt";
@@ -98,7 +98,7 @@ namespace Task_WEB.Controllers
                 {
                     Name = commentModel.Name,
                     Body = commentModel.Body,
-                  //  ParentId = _gameStoreService. commentModel.ParentName// добавить обработку через ID
+                    //  ParentId = _gameStoreService. commentModel.ParentName// добавить обработку через ID
                     ParentName = commentModel.ParentName,
                     GameId = commentModel.GameId
                 };
@@ -113,7 +113,7 @@ namespace Task_WEB.Controllers
         {
             if (_gameStoreService.GetGameByKey(gameKey) != null)
             {
-                IList<CommentDTO> commensDTO= _gameStoreService.GetCommentsByGameKey(gameKey);
+                IList<CommentDTO> commensDTO = _gameStoreService.GetCommentsByGameKey(gameKey);
 
                 return Json(commensDTO, JsonRequestBehavior.AllowGet);
             }
