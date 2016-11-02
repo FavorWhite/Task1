@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using Task1_DAL.Intefaces;
 using Task1_DAL.Repositories;
+using AutoMapper;
+using Task1_BLL.Configuration;
 
 namespace Task1_BLL.Infrastructure
 {
@@ -18,6 +20,14 @@ namespace Task1_BLL.Infrastructure
         }
         public override void Load()
         {
+            MapperConfiguration conf = new MapperConfiguration(
+             cfg =>
+             {
+                 cfg.AddProfile<MappingBLLProfile>();
+             });
+
+            var mapper = conf.CreateMapper();
+            Bind<IMapper>().ToConstant(mapper);
             Bind<IUnitOfWork>().To<EFUnitOfWork>().WithConstructorArgument(_connectionString);
         }
     }

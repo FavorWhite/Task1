@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
+using Task1_BLL.Configuration;
 using Task1_BLL.DTO;
 using Task1_BLL.Interfaces;
 using Task1_DAL.Entities;
@@ -14,12 +15,18 @@ namespace Task1_BLL.Services
     public class GameStoreService : IGameStoreService
     {
         private readonly IUnitOfWork _database;// = new EFUnitOfWork("DefaultConnection");
+        //private readonly IMapper Mapper ;
 
         public GameStoreService(IUnitOfWork database)
         {
+           // Mapper.Initialize(x=>x.AddProfile(new MappingBLLProfile()));
             _database = database;
         }
-
+        //public GameStoreService(IUnitOfWork database, IMapper mapper)
+        //{
+        //    _database = database;
+        //    Mapper = mapper;
+        //}
         public void AddComment(CommentDTO commentDTO)
         {
             Comment comment = new Comment
@@ -65,99 +72,64 @@ namespace Task1_BLL.Services
         }
         public IList<CommentDTO> GetComments()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Comment, CommentDTO>());
-            var commentDTOs = Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(_database.Comment.GetAll());
-            return commentDTOs.ToList();
-        }
 
+            //Mapper.Initialize(cfg => cfg.CreateMap<Comment, CommentDTO>());
+            var comments = _database.Comment.GetAll().ToList();
+            var commentDTOs = AutoMapper.Mapper.Map<IList<Comment>, IList<CommentDTO>>(comments);
+         
+           // var commentDTOs= Mapper.Map<IList<Comment>, IList<CommentDTO>>(comments);
+            return commentDTOs;
+        }
         public IList<CommentDTO> GetCommentsByGameKey(string gameKey)
         {
             int gameId = GetGameByKey(gameKey).Id;
             var commentDTOs = GetComments().Where(g => g.GameId == gameId).ToList();
             return commentDTOs;
         }
-
-
-
         public IList<GameDTO> GetGameByGenre(int genreId)//Check
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Genre, GenreDTO>());
-            var genreDTOs = Mapper.Map<IEnumerable<Genre>, IEnumerable<GenreDTO>>(_database.Genre.GetAll());
+            //Mapper.Initialize(cfg => cfg.CreateMap<Genre, GenreDTO>());
+            //var genreDTOs = Mapper.Map<IEnumerable<Genre>, IEnumerable<GenreDTO>>(_database.Genre.GetAll());
+
+            var genre = _database.Genre.GetAll().ToList();
+            var genreDTOs = Mapper.Map<IList<Genre>, IList<GenreDTO>>(genre);
             return genreDTOs.First(g => g.Id == genreId).Games.ToList();
         }
-
         public GameDTO GetGameByKey(string key)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
-            var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
-            return gameDTOs.First(g => g.Key == key);
-        }
+            //Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
+            //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
+            var games = _database.Game.GetAll().ToList();
+            var gameDTOs = Mapper.Map<IList<Game>, IList<GameDTO>>(games);
+            GameDTO result;
+            try
+            {
+                result = gameDTOs.First(g => g.Key == key);
+            }
+            catch (InvalidOperationException)
+            {
+                result = null;
 
+            }
+            return result;
+        }
         public IList<GameDTO> GetGameByPlatformType(int platformTypeId)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<PlatformType, PlatformTypeDTO>());
-            var PfTDTOs = Mapper.Map<IEnumerable<PlatformType>, IEnumerable<PlatformTypeDTO>>(_database.PlatformType.GetAll());
+          //  AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<PlatformType, PlatformTypeDTO>());
+            var PfTDTOs = AutoMapper.Mapper.Map<IEnumerable<PlatformType>, IEnumerable<PlatformTypeDTO>>(_database.PlatformType.GetAll());
             return PfTDTOs.First(g => g.Id == platformTypeId).Games.ToList();
         }
-
         public IList<GameDTO> GetGames()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
-            var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
-            return gameDTOs.ToList();
+            //Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
+            //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
+            var games = _database.Game.GetAll().ToList();
+            var gameDTOs = Mapper.Map<List<GameDTO>>(games);
+            return gameDTOs;
         }
-
-        #region Comment -> Mapping Game to GameDTO  -- GetGameDTO
-
-        //private IList<GameDTO> GetGameDTOs()
-        //{
-        //    IList<GameDTO> GameDTOs = new List<GameDTO>();
-        //    IList<Game> Games = Database.Game.GetAll().ToList();
-        //    foreach (var item in Games)
-        //    {
-        //        List<GenreDTO> genres = new List<GenreDTO>();
-        //        foreach (var genre in item.Genres)
-        //        {
-        //            GenreDTO genreDTO = new GenreDTO
-        //            {
-        //                Id = genre.Id,
-        //                Name = genre.Name,
-        //                ParentId = genre.ParentId
-        //            };
-        //            genres.Add(genreDTO);
-        //        }
-        //        List<PlatformTypeDTO> platformTypeDTOs = new List<PlatformTypeDTO>();
-        //        foreach (var type in item.PlatformTypes)
-        //        {
-        //            PlatformTypeDTO platformTypeDTO = new PlatformTypeDTO
-        //            {
-        //                Id = type.Id,
-        //                Type = type.Type
-        //            };
-        //            platformTypeDTOs.Add(platformTypeDTO);
-        //        }
-        //        GameDTO game = new GameDTO
-        //        {
-        //            Id = item.Id,
-        //            Key = item.Key,
-        //            Description = item.Description,
-        //            Name = item.Name,
-        //            Genres = genres,
-        //            PlatformTypes = platformTypeDTOs
-        //        };
-        //        GameDTOs.Add(game);
-
-        //    }
-        //    return GameDTOs;
-        //}
-
-        #endregion
-
         public void Dispose()
         {
             _database.Dispose();
         }
-
-
     }
 }
