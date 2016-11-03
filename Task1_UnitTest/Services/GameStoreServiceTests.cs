@@ -22,6 +22,7 @@ namespace Task1_BLL.Services.Tests
     {
         private Mock<IRepository<Game>> _mockGameRepository;
         private Mock<IRepository<Genre>> _mockGenreRepository;
+        private Mock<IRepository<PlatformType>> _mockPlatformTypeRepository;
         private Mock<IUnitOfWork> _mockUow;
         private GameStoreService _gameStoreService;
 
@@ -37,6 +38,7 @@ namespace Task1_BLL.Services.Tests
             _mockUow = new Mock<IUnitOfWork>();
             _gameStoreService = new GameStoreService(_mockUow.Object);
             _mockGenreRepository = new Mock<IRepository<Genre>>();
+            _mockPlatformTypeRepository = new Mock<IRepository<PlatformType>>();
         }
 
         #region comm
@@ -96,8 +98,6 @@ namespace Task1_BLL.Services.Tests
         public void GetGames_GettingEmptyGameList_ReturnEmptyGameList()
         {
             // Arrange
-            //var expectedGames = new List<Game>();
-            // _mockGameRepository.Setup(x => x.GetAll()).Returns(expectedGames);
             _mockUow.Setup(x => x.Game).Returns(_mockGameRepository.Object);
 
             // Act
@@ -187,7 +187,7 @@ namespace Task1_BLL.Services.Tests
         }
 
         [Test]
-        public void GetGameByGenre_GettingGameByCorrectGenreId_ResultGameList()
+        public void GetGameByGenre_GettingGameListByGenreId_ResultExpectedGameList()
         {
             // Arrange
             int genreId = 2;
@@ -196,8 +196,8 @@ namespace Task1_BLL.Services.Tests
                 new Game {Id = 1, Name = "Heroes", Key = "Heroes"},
                 new Game {Id = 2, Name = "NFS", Key = "NFS"}
             };
-            Genre Action = new Genre {Id=1, Name = "action"};
-            Genre RPG = new Genre { Id =2, Name = "RPG",Games = games };
+            Genre Action = new Genre { Id = 1, Name = "action" };
+            Genre RPG = new Genre { Id = 2, Name = "RPG", Games = games };
             Genre Racing = new Genre { Id = 3, Name = "Racing" };
             IEnumerable<Genre> GenreList = new List<Genre>
             {
@@ -217,6 +217,59 @@ namespace Task1_BLL.Services.Tests
             // Act
             var results = _gameStoreService.GetGameByGenre(genreId);
 
+
+            //Assert
+            Assert.AreEqual(results.Count, 2);
+            foreach (var game in results)
+            {
+                Assert.IsTrue(expectedGameList.FirstOrDefault(x => x.Name == game.Name) != null);
+            }
+        }
+        [Test]
+        public void GetGameByGenre_GettingGameListGenreId_ResultEmptyGameList()
+        {
+            // Arrange
+            int genreId = 1;
+
+            Genre Racing = new Genre { Id = 1, Name = "Racing" };
+            IEnumerable<Genre> GenreList = new List<Genre>
+            {
+                Racing
+            };
+            _mockGenreRepository.Setup(x => x.GetAll()).Returns(GenreList);
+            _mockUow.Setup(x => x.Genre).Returns(_mockGenreRepository.Object);
+
+            // Act
+            var results = _gameStoreService.GetGameByGenre(genreId);
+            //Assert
+            Assert.AreEqual(results.Count, 0);
+        }
+
+        [Test]
+        public void GetGameByPlatformType_GettingGameListByGenreId_ResultExpectedGameList()
+        {
+            // Arrange
+            int platformId = 1;
+            var games = new List<Game>
+            {
+                new Game {Id = 1, Name = "Heroes", Key = "Heroes"},
+                new Game {Id = 2, Name = "NFS", Key = "NFS"}
+            };
+            var expectedGameList = new List<GameDTO>
+            {
+                new GameDTO {Id = 1, Name = "Heroes", Key = "Heroes"},
+                new GameDTO {Id = 2, Name = "NFS", Key = "NFS"}
+            };
+            PlatformType Web = new PlatformType { Id = 1, Type = "web", Games = games };
+            IEnumerable<PlatformType> PlatformTypeList = new List<PlatformType>
+            {
+                Web
+            };
+            _mockPlatformTypeRepository.Setup(x => x.GetAll()).Returns(PlatformTypeList);
+            _mockUow.Setup(x => x.PlatformType).Returns(_mockPlatformTypeRepository.Object);
+
+            // Act
+            var results = _gameStoreService.GetGameByPlatformType(platformId);
 
             //Assert
             Assert.AreEqual(results.Count, 2);
