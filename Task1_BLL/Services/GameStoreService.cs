@@ -65,7 +65,7 @@ namespace Task1_BLL.Services
             _database.Game.Update(game);
             _database.Save();
         }
-        public void DeleteGame(int id)
+        public void DeleteGame(int id)//Почему не показывает покрытие тестом ????
         {
             _database.Game.Delete(id);
             _database.Save();
@@ -101,17 +101,7 @@ namespace Task1_BLL.Services
             //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
             var games = _database.Game.GetAll().ToList();
             var gameDTOs = Mapper.Map<IList<Game>, IList<GameDTO>>(games);
-            GameDTO result;
-            try
-            {
-                result = gameDTOs.First(g => g.Key == key);
-            }
-            catch (InvalidOperationException)
-            {
-                result = null;
-
-            }
-            return result;
+            return gameDTOs.FirstOrDefault(g=>g.Key==key);
         }
         public IList<GameDTO> GetGameByPlatformType(int platformTypeId)
         {

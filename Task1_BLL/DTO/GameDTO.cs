@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Task1_DAL.Entities;
 
 namespace Task1_BLL.DTO
 {
