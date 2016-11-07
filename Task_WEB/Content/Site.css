@@ -1,0 +1,60 @@
+﻿html {
+    background-color: #777;
+}
+
+body {
+    background-color: #fff;
+}
+a:hover {
+    text-decoration: none;
+}
+/*Header*/
+/*Navigation*/
+.navigation-page, .navigation-regis {
+    list-style: none;
+}
+.navigation-page {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e1e1e0;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    right: 66px;
+    top: -25px;
+}
+.navigation-page li {
+    border-right: 1px solid #e1e1e0;
+    float: left;
+
+}
+.navigation-page a {
+    display: block;
+    line-height: 50px;
+    padding: 0 15px;
+}
+.navigation-page li:last-child{
+    border-right:none;
+}
+.navigation-regis {
+    float: right;
+    margin-top: 9px;
+
+}
+.navigation-regis li {
+    border: 1px solid #e1e1e0;
+    border-radius: 10px;
+    float: left;
+    line-height: 29px;
+    margin-right: 15px;
+    padding: 0 15px;
+}
+.navigatioln-block {
+    margin-top: 50px;
+}
+.navigatioln-block .center-block{
+    position: relative;
+} 
+
+
+

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Task1_BLL.Configuration;
+using Task_WEB.App_Start;
 
 namespace Task_WEB
 {
@@ -16,7 +18,7 @@ namespace Task_WEB
             
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             MapperInit.Init();
         }
     }
