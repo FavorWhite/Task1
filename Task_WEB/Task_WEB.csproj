@@ -137,10 +137,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\back_wall\back_wall1.jpg" />
+    <Content Include="Content\images\back_wall\back_wall2.jpg" />
+    <Content Include="Content\images\back_wall\back_wall3.jpg" />
+    <Content Include="Content\images\back_wall\back_wall4.jpg" />
+    <Content Include="Content\images\back_wall\back_wall5.jpg" />
+    <Content Include="Content\images\icons\social-icons.png" />
     <Content Include="Content\images\jumbotron\archer_img4.jpg" />
     <Content Include="Content\images\jumbotron\batelfield3_img1.jpg" />
     <Content Include="Content\images\jumbotron\gace_img3.jpg" />
-    <Content Include="Content\images\jumbotron\monster_img2.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Files\text.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

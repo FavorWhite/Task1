@@ -9,8 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="container">
-
+<body class="container body-wrapper">
     <header class="header">
         <div class="row">
             <div class="col-md-2">
@@ -36,27 +35,97 @@
             </nav>
             <nav class="col-md-12 navigatioln-block">
                 <div class="center-block ">
-                    <img class="img-responsive" src="~/Content/images/jumbotron/batelfield3_img1.jpg"/>
+                    <img class="img-responsive" src="~/Content/images/jumbotron/batelfield3_img1.jpg" />
                     <ul class="navigation-page">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Games", "Games", "Home")</li>
-                        <li>@Html.ActionLink("Ganres", "Genres", "Home")</li>
+                        <li>@Html.ActionLink("Genres", "Genres", "Home")</li>
                         <li>@Html.ActionLink("Publishers", "Publishers", "Home")</li>
                         <li>@Html.ActionLink("Orders", "Orders", "Home")</li>
                         <li>@Html.ActionLink("My bucket", "MyBucket", "Home")</li>
                     </ul>
                 </div>
-               
+
             </nav>
         </div>
     </header>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
+    </div>
+    <div class="social-contact">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="social-item">
+                    <div class="social-title">
+                        <div class="social-icon mail-icon"></div>
+                        <div class="social-title-text">Get in touch</div>
+                    </div>
+                    <div class="social-body contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Name</label>
+                                    <input class="form-item form-input-item" type="text" name="name" placeholder="Name" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">Email</label>
+                                    <input class="form-item form-input-item" type="text" name="email" placeholder="Email" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-item form-textarea-item" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="social-item">
+                    <div class="social-title">
+                        <div class="social-icon twitter-icon"></div>
+                        <div class="social-title-text">Twitter updates</div>
+                    </div>
+                    <div class="social-body twitter-mess">
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                            <span class="mess-time"> 13:01 - 7 нояб. 2016 г.</span>
+                        </div>
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                            <span class="mess-time"> 13:01 - 7 нояб. 2016 г.</span>
+                        </div>
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                            <span class="mess-time"> 13:01 - 7 нояб. 2016 г.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="social-item">
+                    <div class="social-title">
+                        <div class="social-icon blog-icon"></div>
+                        <div class="social-title-text">From the blog</div>
+                    </div>
+                    <div class="social-body blog-mess">
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                        </div>
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                        </div>
+                        <div class="message">
+                            <a href="#" class="mess-text"> Now Available on Steam - Trillion: God of Destruction, 40% off!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer>
         <p>&copy; @DateTime.Now.Year – GameStore</p>
     </footer>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
