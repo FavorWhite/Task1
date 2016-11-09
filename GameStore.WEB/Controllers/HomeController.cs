@@ -25,70 +25,7 @@ namespace GameStore.WEB.Controllers
             return View();
         }
         // GET: Games
-        public ActionResult Games()
-        {
-            List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
-            return Json(gameDTOs, JsonRequestBehavior.AllowGet);
-        }
-        // GET: Game/{key}
-        [HttpGet]
-        public ActionResult Game(string key)
-        {
-            GameDTO gameDTO = _gameStoreService.GetGameByKey(key);
-            return Json(gameDTO, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Home/CreateGame
-        public ActionResult CreateGame()
-        {
-            return View();
-        }
-
-        // POST: Home/CreateGame
-        [HttpPost]
-        public ActionResult CreateGame(AddGameModel gameModel)
-        {
-            if (ModelState.IsValid)
-            {
-                GameDTO GameDTO = new GameDTO
-                {
-                    Name = gameModel.Name,
-                    Key = gameModel.Key,
-                    Description = gameModel.Description
-                };
-                _gameStoreService.CreateGame(GameDTO);
-            }
-            return RedirectToAction("Games");
-        }
-        // POST: Home/EditGame
-        [HttpPost]
-        public ActionResult EditGame(AddGameModel gameModel)
-        {
-            if (ModelState.IsValid)
-            {
-                GameDTO GameDTO = new GameDTO
-                {
-                    Id = gameModel.Id,
-                    Name = gameModel.Name,
-                    Key = gameModel.Key,
-                    Description = gameModel.Description
-                };
-                _gameStoreService.EditGame(GameDTO);
-            }
-
-            return RedirectToAction("Games");
-        }
-        // GET: Home/DownloadGame/{key}
-        public FileResult DownloadGame(string gameKey)
-        {
-            if (_gameStoreService.GetGameByKey(gameKey) != null)
-            {
-                string file_path = Server.MapPath("~/Files/" + gameKey + ".txt");
-                string file_type = "application/txt";
-                return File(file_path, file_type);
-            }
-            throw new ArgumentException();
-        }
+        
         [HttpPost]
         public ActionResult AddComment(AddCommentModel commentModel)
         {
@@ -120,18 +57,11 @@ namespace GameStore.WEB.Controllers
             throw new ArgumentException();
         }
 
-        // GET: Home/Delete/{id}
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Home/DeleteGame/{id}
-        [HttpPost]
-        public ActionResult DeleteGame(int id)
+
+        public ActionResult GetBaners()
         {
-            _gameStoreService.DeleteGame(id);
-            return RedirectToAction("Games");
+            return PartialView("_Banners");
         }
     }
 }

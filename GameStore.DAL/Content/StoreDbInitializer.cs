@@ -64,9 +64,14 @@ namespace GameStore.DAL.Content
 
 
 
-            Game Heroes = new Game { Key = "first", Name = "Heroes", Description = "heroes" };
-            Game NFS = new Game { Key = "second", Name = "Need for Speed", Description = "NFS" };
-
+            Game Heroes = new Game {Key = "heroes", Name = "Heroes7", Description = "Our story takes place during a war of succession. The Empress’ murder has left a realm in flames with many hungry rivals ready to seize the throne by force. The Duke Ivan then calls together a prestigious council of six trusted advisors to restore order and end the conflict that set ablaze Ashan’s lands."};
+            Game NFS = new Game
+            {
+                Key = "nfs",
+                Name = "Need for Speed",
+                Description =
+                    "Need For Speed: Most Wanted for Android - the long-awaited racing from EA Games got on your device! You will be pleased with the effects of the collision, implemented with the help of new physics now emergencies look even more realistic. Scratches on the body, broken glass, and lights, all this is also present in the Need for Speed ​​Most Wanted for Android!"
+            };
             PlatformType mobile = new PlatformType {Type = "mobile"};
             PlatformType browser = new PlatformType { Type = "browser" };
             PlatformType desktop = new PlatformType { Type = "desktop" };

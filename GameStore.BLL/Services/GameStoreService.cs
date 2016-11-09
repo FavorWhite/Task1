@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using GameStore.BLL.DTO;
 using GameStore.BLL.Interfaces;
@@ -109,12 +110,28 @@ namespace GameStore.BLL.Services
             var PfTDTOs = AutoMapper.Mapper.Map<IEnumerable<PlatformType>, IEnumerable<PlatformTypeDTO>>(_database.PlatformType.GetAll());
             return PfTDTOs.First(g => g.Id == platformTypeId).Games.ToList();
         }
-        public IList<GameDTO> GetGames()
+        public IList<GameDTO> GetGames(/*List<int> genres = null, List<int> platforms = null*/)
         {
+            //Expression<Func<Game, bool>> predicate;
+            //Func<Game, bool> predicate2 = g => g.Key != "nfs";
+            //var genres = _database.Genre.GetAll().ToList();
+
+            //if (genres != null)
+            //{
+            //    predicate.And(x => x.Genres.Contains(g => genres.All()));
+            //}
+
+            //if (platfoms != null)
+            //{
+            //    predicate.And(x => x.Genres.Contains(g => genres.All()));
+            //}
+
             //Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
             //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
             var games = _database.Game.GetAll().ToList();
+            //var filtered = games.Where(predicate2).ToList();
             var gameDTOs = Mapper.Map<List<GameDTO>>(games);
+            //var gameDTOs = Mapper.Map<List<GameDTO>>(games);
             return gameDTOs;
         }
         public void Dispose()

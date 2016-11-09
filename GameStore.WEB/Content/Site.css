@@ -121,19 +121,20 @@ a:hover {
 }
 
 .contact-form {
-    background: #F7B2A9 none repeat scroll 0 0;
+    background: #F7B2A9;
 }
 
 .twitter-mess {
-    background: #C3F7F6 none repeat scroll 0 0;
+    background: #C3F7F6;
 }
 
 .blog-mess {
-    background: #FFEFA1 none repeat scroll 0 0;
+    background: #FFEFA1;
 }
 
 .social-body {
     border-radius: 4px;
+    height: 336px;
     padding: 45px 15px 15px;
 }
 
@@ -179,6 +180,47 @@ a:hover {
 .mess-time {
     color: #8d8d8d;
     font-size: 10px;
+}
+/*Main*/
+.main-content {
+    padding: 35px 0;
+}
+.content > p {
+    text-align: justify;
+    text-indent: 25px;
+}
+.game-title {
+    font-family: "Trebuchet MS";
+    font-size: 25px;
+    font-weight: bold;
+}
+.game-descr {
+    color: #666;
+    text-align: left;
+    text-indent: 13px;
+}
+.add-tocard-btn {  /*добавить  z-index!!!!!!!!!*/
+    background: #68c168 none repeat scroll 0 0;
+    border-radius: 11px;
+    bottom: 0;
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 35px;
+    position: absolute;
+    right: 0;
+   
+}
+.add-tocard-btn:hover {
+    background: #449D44;
+}
+
+/*Sidebar*/
+.banner-wrapper {
+    display: block;
+    margin-bottom: 15px;
+}
+.banner-wrapper:last-child {
+    margin-bottom: 0;
 }
 
 /*Footer*/

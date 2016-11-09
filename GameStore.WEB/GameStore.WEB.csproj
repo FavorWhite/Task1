@@ -147,6 +147,8 @@
     <Content Include="Content\images\banners\banner3.jpg" />
     <Content Include="Content\images\banners\banner4.jpg" />
     <Content Include="Content\images\banners\banner5.jpg" />
+    <Content Include="Content\images\game_img\heroes7.png" />
+    <Content Include="Content\images\game_img\nfs.png" />
     <Content Include="Content\images\icons\social-icons.png" />
     <Content Include="Content\images\jumbotron\archer_img4.jpg" />
     <Content Include="Content\images\jumbotron\batelfield3_img1.jpg" />
@@ -183,6 +185,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,7 +202,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Bunners.cshtml" />
+    <Content Include="Views\Shared\_Banners.cshtml" />
+    <None Include="Views\Games\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
