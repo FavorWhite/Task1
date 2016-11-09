@@ -15,6 +15,13 @@ a:hover {
 }
 /*Header*/
 /*Navigation*/
+.logo {
+    display: inline-block;
+    font-family: Comic Sans MS;
+    font-size: 50px;
+    line-height: 50px;
+    margin: 20px 0 0 10px;
+}
 .navigation-page, .navigation-regis {
     list-style: none;
 }
@@ -172,4 +179,12 @@ a:hover {
 .mess-time {
     color: #8d8d8d;
     font-size: 10px;
+}
+
+/*Footer*/
+footer {
+    border-top: 1px solid #d4d4d4;
+    height: 100px;
+    margin-top: 50px;
+    padding: 20px;
 }

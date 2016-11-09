@@ -10,47 +10,61 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="container body-wrapper">
+<div class="row">
     <header class="header">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="logo-wrapper">
-                    @Html.ActionLink("Game Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-            </div>
-            <nav class="nav col-md-10">
-                <ul class="navigation-regis ">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Sing In", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Sing Up", "Register", "Account")</li>
-                    }
-                    else
-                    {
-                        <li>
-                            <span class="user-name">Hi @User.Identity.Name</span>
-                        </li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                    }
-                </ul>
-            </nav>
-            <nav class="col-md-12 navigatioln-block">
-                <div class="center-block ">
-                    <img class="img-responsive" src="~/Content/images/jumbotron/batelfield3_img1.jpg" />
-                    <ul class="navigation-page">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Games", "Games", "Home")</li>
-                        <li>@Html.ActionLink("Genres", "Genres", "Home")</li>
-                        <li>@Html.ActionLink("Publishers", "Publishers", "Home")</li>
-                        <li>@Html.ActionLink("Orders", "Orders", "Home")</li>
-                        <li>@Html.ActionLink("My bucket", "MyBucket", "Home")</li>
-                    </ul>
-                </div>
 
-            </nav>
+        <div class="col-md-6">
+            <div class="logo-wrapper">
+                @Html.ActionLink("Game Store", "Index", "Home", new { area = "" }, new { @class = "logo" })
+            </div>
         </div>
+        <nav class="nav col-md-6">
+            <ul class="navigation-regis ">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sing In", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Sing Up", "Register", "Account")</li>
+                }
+                else
+                {
+                    <li>
+                        <span class="user-name">Hi @User.Identity.Name</span>
+                    </li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                }
+            </ul>
+        </nav>
+        <nav class="col-md-12 navigatioln-block">
+            <div class="center-block ">
+                <img class="img-responsive" src="~/Content/images/jumbotron/batelfield3_img1.jpg" />
+                <ul class="navigation-page">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Games", "Games", "Home")</li>
+                    <li>@Html.ActionLink("Genres", "Genres", "Home")</li>
+                    <li>@Html.ActionLink("Publishers", "Publishers", "Home")</li>
+                    <li>@Html.ActionLink("Orders", "Orders", "Home")</li>
+                    <li>@Html.ActionLink("My bucket", "MyBucket", "Home")</li>
+                </ul>
+            </div>
+
+        </nav>
+
     </header>
-    <div class="body-content">
-        @RenderBody()
+</div>
+    <div class="row">
+        <div class="body-content col-md-8">
+            @RenderBody()
+        </div>
+        <aside class="col-md-4">
+            @if (ViewBag.Title=="Index")
+            {
+            
+            }
+            else
+            {
+  
+            }
+        </aside>
     </div>
     <div class="social-contact">
         <div class="row">
