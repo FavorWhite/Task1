@@ -142,6 +142,11 @@
     <Content Include="Content\images\back_wall\back_wall3.jpg" />
     <Content Include="Content\images\back_wall\back_wall4.jpg" />
     <Content Include="Content\images\back_wall\back_wall5.jpg" />
+    <Content Include="Content\images\banners\banner1.png" />
+    <Content Include="Content\images\banners\banner2.jpg" />
+    <Content Include="Content\images\banners\banner3.jpg" />
+    <Content Include="Content\images\banners\banner4.jpg" />
+    <Content Include="Content\images\banners\banner5.jpg" />
     <Content Include="Content\images\icons\social-icons.png" />
     <Content Include="Content\images\jumbotron\archer_img4.jpg" />
     <Content Include="Content\images\jumbotron\batelfield3_img1.jpg" />
