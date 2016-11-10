@@ -15,7 +15,9 @@ namespace GameStore.BLL.Configuration
            // CreateMap<Game, GameDTO>().MaxDepth(2).ReverseMap().ForMember(x=>x.Id,op=>op.AllowNull());
             CreateMap<PlatformType, PlatformTypeDTO>().MaxDepth(2);
             CreateMap<Genre, GenreDTO>().MaxDepth(2);
+          //  CreateMap<GenreDTO, GenreModel>().MaxDepth(2);
             CreateMap<Comment, CommentDTO>().MaxDepth(2);
+
         }
     }
 }

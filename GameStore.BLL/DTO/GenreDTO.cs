@@ -9,7 +9,7 @@ namespace GameStore.BLL.DTO
         public string Name { get; set; }
         public int? ParentId { get; set; }
 
-        public virtual ICollection<GenreDTO> SubGenres { get; set; }
+        public virtual ICollection<GenreDTO> SubGenres{ get; set; }
         public virtual ICollection<GameDTO> Games { get; set; }
     }
 }

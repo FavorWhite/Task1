@@ -134,6 +134,15 @@ namespace GameStore.BLL.Services
             //var gameDTOs = Mapper.Map<List<GameDTO>>(games);
             return gameDTOs;
         }
+
+
+        public IList<GenreDTO> GetGenres()
+        {
+            var genre = _database.Genre.GetAll().ToList();
+            var genreDTOs = Mapper.Map<IList<Genre>, IList<GenreDTO>>(genre);
+            return genreDTOs;
+        }
+
         public void Dispose()
         {
             _database.Dispose();

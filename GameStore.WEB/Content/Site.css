@@ -37,34 +37,34 @@ a:hover {
     top: -25px;
 }
 
-    .navigation-page li {
-        border-right: 1px solid #e1e1e0;
-        float: left;
-    }
+.navigation-page li {
+    border-right: 1px solid #e1e1e0;
+    float: left;
+}
 
-    .navigation-page a {
-        display: block;
-        line-height: 50px;
-        padding: 0 15px;
-    }
+.navigation-page a {
+    display: block;
+    line-height: 50px;
+    padding: 0 15px;
+}
 
-    .navigation-page li:last-child {
-        border-right: none;
-    }
+.navigation-page li:last-child {
+    border-right: none;
+}
 
 .navigation-regis {
     float: right;
     margin-top: 9px;
 }
 
-    .navigation-regis li {
-        border: 1px solid #e1e1e0;
-        border-radius: 10px;
-        float: left;
-        line-height: 29px;
-        margin-right: 15px;
-        padding: 0 15px;
-    }
+.navigation-regis li {
+    border: 1px solid #e1e1e0;
+    border-radius: 10px;
+    float: left;
+    line-height: 29px;
+    margin-right: 15px;
+    padding: 0 15px;
+}
 
 .navigatioln-block {
     margin-top: 50px;
@@ -207,11 +207,14 @@ a:hover {
     font-size: 18px;
     padding: 5px 35px;
     position: absolute;
-    right: 0;
+    right: 15px;
    
 }
 .add-tocard-btn:hover {
     background: #449D44;
+}
+.game-item {
+    margin-bottom: 35px;
 }
 
 /*Sidebar*/
@@ -221,6 +224,11 @@ a:hover {
 }
 .banner-wrapper:last-child {
     margin-bottom: 0;
+}
+.dropdown-subgenre-btn {
+    height: 20px;
+    width: 20px;
+    background: red;
 }
 
 /*Footer*/

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GameStore.BLL.DTO;
 using GameStore.BLL.Interfaces;
 using GameStore.WEB.Models;
@@ -20,6 +21,13 @@ namespace Task_WEB.Controllers
         // GET: Games
         public ActionResult Index()
         {
+            List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
+            return View(gameDTOs);
+        }
+        [HttpPost]
+        public ActionResult Index(List<int> genresId )
+        {
+           ////////////////////////////////////////////////////////
             List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
             return View(gameDTOs);
         }
@@ -98,7 +106,11 @@ namespace Task_WEB.Controllers
 
         public ActionResult GetGameFilters()
         {
-            throw new NotImplementedException();
+            var genre = _gameStoreService.GetGenres(); 
+           //var genreModels = Mapper.Map<IList<GenreDTO>, IList<GenreModel>>(genre);
+            return PartialView("_GenreList", genre);
+            
+            //throw new NotImplementedException();
         }
     }
 }

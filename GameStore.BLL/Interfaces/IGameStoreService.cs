@@ -14,6 +14,7 @@ namespace GameStore.BLL.Interfaces
         IList<CommentDTO> GetCommentsByGameKey(string gameKey);
         IList<GameDTO> GetGameByGenre(int genreId);
         IList<GameDTO> GetGameByPlatformType(int platformTypeId);
+        IList<GenreDTO> GetGenres();
         void Dispose();
     }
 }
