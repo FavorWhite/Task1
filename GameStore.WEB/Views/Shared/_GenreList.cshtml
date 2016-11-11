@@ -3,16 +3,22 @@
 <div>
     @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "game-list" }))
     {
-        foreach (var genre in Model.Where(g => g.ParentId == null))
-        {
-            <div class="sidebar-genre-item">
+        <ul class="genre-block">
+            @foreach (var genre in Model.Where(g => g.ParentId == null))
+            {
+            <li class="sidebar-genre-item">
                 <input type="checkbox" id="@genre.Name" value="@genre.Id">
                 <label>@genre.Name</label>
-                <div class="dropdown-subgenre-btn"></div>
-            </div>
-                if (genre.SubGenres != null)
+                @if (genre.SubGenres.Count!=0)
                 {
-            <div class="subgenres">
+                    <span class="dropdown-subgenre-btn"></span>
+                }
+                
+
+            </li>
+                if (genre.SubGenres.Count != 0)
+                {
+            <li class="subgenres">
                 @foreach (var subgenre in genre.SubGenres)
                 {
                     <div class="sidebar-genre-item">
@@ -20,10 +26,12 @@
                         <label>@subgenre.Name</label>
                     </div>
                 }
-            </div>
+            </li>
 
-                }
-                }
-                <input type="submit" value="Filter" />
-                }
-            </div>
+            }
+            }
+            <input type="submit" value="Filter" class="filter-btn"/>
+        </ul>
+    }
+       
+    </div>

@@ -149,6 +149,8 @@
     <Content Include="Content\images\banners\banner5.jpg" />
     <Content Include="Content\images\game_img\heroes7.png" />
     <Content Include="Content\images\game_img\nfs.png" />
+    <Content Include="Content\images\icons\chevron-down.png" />
+    <Content Include="Content\images\icons\chevron-up.png" />
     <Content Include="Content\images\icons\social-icons.png" />
     <Content Include="Content\images\jumbotron\archer_img4.jpg" />
     <Content Include="Content\images\jumbotron\batelfield3_img1.jpg" />
