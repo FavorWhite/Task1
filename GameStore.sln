@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.WEB", "GameStore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.UnitTest", "GameStore.UnitTest\GameStore.UnitTest.csproj", "{B9CE85B1-5864-45C2-A675-07FDE52A0D69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{6BD45070-04C1-4CDA-8143-45CE439CA2C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B9CE85B1-5864-45C2-A675-07FDE52A0D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9CE85B1-5864-45C2-A675-07FDE52A0D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9CE85B1-5864-45C2-A675-07FDE52A0D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BD45070-04C1-4CDA-8143-45CE439CA2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD45070-04C1-4CDA-8143-45CE439CA2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD45070-04C1-4CDA-8143-45CE439CA2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD45070-04C1-4CDA-8143-45CE439CA2C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

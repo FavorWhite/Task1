@@ -1,0 +1,17 @@
+﻿@model System.Collections.Generic.List<GameStore.BLL.DTO.GameDTO>
+
+@foreach (var game in Model)
+            {
+    <figure class="col-md-12 game-item">
+        <a href="#">
+            <div class="img-holder col-md-4">
+                <img class="img-responsive" src="@Url.Content($"~/Content/images/game_img/{game.Key}.png")" />
+            </div>
+            <figcaption class="col-md-8 game-meta">
+                <div class="game-title">@game.Name</div>
+                <div class="game-descr">@game.Description</div>
+            </figcaption>
+            <button class="add-tocard-btn">Add</button>
+        </a>
+    </figure>
+}

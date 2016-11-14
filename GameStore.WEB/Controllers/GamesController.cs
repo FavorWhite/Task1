@@ -18,24 +18,36 @@ namespace Task_WEB.Controllers
         {
             _gameStoreService = gameStoreService;
         }
-        // GET: Games
+        
         public ActionResult Index()
+        { 
+            return View();
+        }
+        // GET: Games
+        public ActionResult GetGames()
         {
             List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
-            return View(gameDTOs);
+
+            return PartialView("_Games", gameDTOs);
         }
         [HttpPost]
-        public ActionResult Index(List<int> genresId )
+        public ActionResult FilterGames(int[] genresId )
         {
-           ////////////////////////////////////////////////////////
-            List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
-            return View(gameDTOs);
+            List<GameDTO> gameDTOs;
+            List<int> genresIds=new List<int>();
+            if (genresId != null)
+            {
+                foreach (var genre in genresId)
+                {
+                    genresIds.Add(genre);
+                }
+                gameDTOs = _gameStoreService.GetGames(genresIds).ToList();
+                return PartialView("_Games", gameDTOs);
+            }
+
+            gameDTOs = _gameStoreService.GetGames().ToList();
+            return PartialView("_Games", gameDTOs);
         }
-        //public ActionResult Games()
-        //{
-        //    List<GameDTO> gameDTOs = _gameStoreService.GetGames().ToList();
-        //    return Json(gameDTOs, JsonRequestBehavior.AllowGet);
-        //}
         // GET: Game/{key}
         [HttpGet]
         public ActionResult Game(string key)
@@ -47,12 +59,14 @@ namespace Task_WEB.Controllers
         // GET: Home/CreateGame
         public ActionResult CreateGame()
         {
+            GameDTO game=new GameDTO();
+            //game.Genres=_
             return View();
         }
 
         // POST: Home/CreateGame
         [HttpPost]
-        public ActionResult CreateGame(AddGameModel gameModel)
+        public ActionResult CreateGame(GameDTO gameModel)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +78,7 @@ namespace Task_WEB.Controllers
                 };
                 _gameStoreService.CreateGame(GameDTO);
             }
-            return RedirectToAction("Games");
+            return RedirectToAction("Index");
         }
         // POST: Home/EditGame
         [HttpPost]
@@ -106,11 +120,10 @@ namespace Task_WEB.Controllers
 
         public ActionResult GetGameFilters()
         {
-            var genre = _gameStoreService.GetGenres(); 
-           //var genreModels = Mapper.Map<IList<GenreDTO>, IList<GenreModel>>(genre);
-            return PartialView("_GenreList", genre);
-            
-            //throw new NotImplementedException();
+            var genre = _gameStoreService.GetGenres();
+            var genreModels = Mapper.Map<IList<GenreDTO>, IList<GenreModelViewForFilter>>(genre);
+            return PartialView("_GenreList", genreModels);
+
         }
     }
 }

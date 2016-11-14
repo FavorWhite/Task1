@@ -5,7 +5,7 @@ using GameStore.DAL.EF;
 
 namespace GameStore.DAL.Content
 {
-    public class StoreDbInitializer : DropCreateDatabaseAlways<EF.GameStore>
+    public class StoreDbInitializer : DropCreateDatabaseIfModelChanges<EF.GameStore>
     {
         protected override void Seed(EF.GameStore db)
         {

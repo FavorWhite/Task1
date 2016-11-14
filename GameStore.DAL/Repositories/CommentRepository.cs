@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GameStore.DAL.Entities;
@@ -19,7 +20,7 @@ namespace GameStore.DAL.Repositories
             this.db = context;
         }
 
-        public IEnumerable<Comment> GetAll()
+        public IEnumerable<Comment> GetAll(Expression<Func<Comment, bool>> predicate = null)
         {
             return db.Comments;
         }

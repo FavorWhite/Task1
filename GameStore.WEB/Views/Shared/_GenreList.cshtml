@@ -1,37 +1,45 @@
-﻿@model IList<GameStore.BLL.DTO.GenreDTO>
+﻿@model IList<GameStore.WEB.Models.GenreModelViewForFilter>
+
 
 <div>
-    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "game-list" }))
+    @using (Ajax.BeginForm("FilterGames", "Games", new AjaxOptions { UpdateTargetId = "game-list" }))
     {
         <ul class="genre-block">
             @foreach (var genre in Model.Where(g => g.ParentId == null))
             {
-            <li class="sidebar-genre-item">
-                <input type="checkbox" id="@genre.Name" value="@genre.Id">
-                <label>@genre.Name</label>
-                @if (genre.SubGenres.Count!=0)
-                {
-                    <span class="dropdown-subgenre-btn"></span>
-                }
-                
-
-            </li>
+                <li class="sidebar-genre-item">
+                    <input type="checkbox" name="genresId" value="@genre.Id">@genre.Name
+                    @*@Html.HiddenFor(x => genre.Id, new { @Name = "Id", @id = genre.Id })*@
+                    @*@Html.CheckBoxFor(x => genre.IsSelected, new { @Name = "IsSelected", @id= "IsSelected" })*@
+                    @*<input id="IsSelected" name="IsSelected" type="checkbox" value="true" />
+                        <input name="IsSelected" type="hidden" value="false" />*@
+                    @* <input type="checkbox" id="@genre.Name" value="@genre.Id">*@
+                    <label>@genre.Name</label>
+                    @if (genre.SubGenres.Count != 0)
+                    {
+                        <span class="dropdown-subgenre-btn"></span>
+                    }
+                </li>
                 if (genre.SubGenres.Count != 0)
                 {
-            <li class="subgenres">
-                @foreach (var subgenre in genre.SubGenres)
-                {
-                    <div class="sidebar-genre-item">
-                        <input type="checkbox" id="@subgenre.Name" value="@subgenre.Id">
-                        <label>@subgenre.Name</label>
-                    </div>
+                    <li class="subgenres">
+                        @foreach (var subgenre in genre.SubGenres)
+                        {
+                            <div class="sidebar-genre-item">
+                                @*@Html.HiddenFor(x => subgenre.Id, new { @Name = "Id", @id = @subgenre.Id })*@
+                                <input type="checkbox" name="genresId" value="@subgenre.Id">@subgenre.Name
+                                @*@Html.CheckBoxFor(x => subgenre.IsSelected, new { @Name = "IsSelected", @id = "IsSelected" })*@
+                                @*<input id="IsSelected" name="IsSelected" type="checkbox" value="true" />
+                                    <input name="IsSelected" type="hidden" value="false" />*@
+                                @*<input type="checkbox" id="@subgenre.Name" value="@subgenre.Id">*@
+                                <label>@subgenre.Name</label>
+                            </div>
+                        }
+                    </li>
                 }
-            </li>
-
             }
-            }
-            <input type="submit" value="Filter" class="filter-btn"/>
+            <input type="submit" value="Filter" class="filter-btn" />
         </ul>
     }
-       
-    </div>
+
+</div>

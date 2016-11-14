@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
@@ -10,24 +11,18 @@ using GameStore.BLL.Configuration;
 using GameStore.DAL.Entities;
 using GameStore.DAL.Intefaces;
 using GameStore.DAL.Repositories;
+using Shared;
 
 namespace GameStore.BLL.Services
 {
     public class GameStoreService : IGameStoreService
     {
         private readonly IUnitOfWork _database;// = new EFUnitOfWork("DefaultConnection");
-        //private readonly IMapper Mapper ;
 
         public GameStoreService(IUnitOfWork database)
         {
-           // Mapper.Initialize(x=>x.AddProfile(new MappingBLLProfile()));
             _database = database;
         }
-        //public GameStoreService(IUnitOfWork database, IMapper mapper)
-        //{
-        //    _database = database;
-        //    Mapper = mapper;
-        //}
         public void AddComment(CommentDTO commentDTO)
         {
             Comment comment = new Comment
@@ -45,12 +40,14 @@ namespace GameStore.BLL.Services
 
         public void CreateGame(GameDTO gameDTO)
         {
-            Game game = new Game
-            {
-                Key = gameDTO.Key,
-                Name = gameDTO.Name,
-                Description = gameDTO.Description
-            };
+            //Game game = new Game
+            //{
+            //    Key = gameDTO.Key,
+            //    Name = gameDTO.Name,
+            //    Description = gameDTO.Description
+            //};
+            var game= Mapper.Map<GameDTO, Game>(gameDTO);
+
             _database.Game.Create(game);
             _database.Save();
         }
@@ -73,12 +70,9 @@ namespace GameStore.BLL.Services
         }
         public IList<CommentDTO> GetComments()
         {
-
-            //Mapper.Initialize(cfg => cfg.CreateMap<Comment, CommentDTO>());
             var comments = _database.Comment.GetAll().ToList();
             var commentDTOs = AutoMapper.Mapper.Map<IList<Comment>, IList<CommentDTO>>(comments);
-         
-           // var commentDTOs= Mapper.Map<IList<Comment>, IList<CommentDTO>>(comments);
+
             return commentDTOs;
         }
         public IList<CommentDTO> GetCommentsByGameKey(string gameKey)
@@ -89,49 +83,58 @@ namespace GameStore.BLL.Services
         }
         public IList<GameDTO> GetGameByGenre(int genreId)//Check
         {
-            //Mapper.Initialize(cfg => cfg.CreateMap<Genre, GenreDTO>());
-            //var genreDTOs = Mapper.Map<IEnumerable<Genre>, IEnumerable<GenreDTO>>(_database.Genre.GetAll());
-
-            var genre = _database.Genre.GetAll().ToList();
-            var genreDTOs = Mapper.Map<IList<Genre>, IList<GenreDTO>>(genre);
-            return genreDTOs.First(g => g.Id == genreId).Games.ToList();
+            var game = _database.Game.GetAll(x => x.Genres.Any(g => g.Id == genreId)).ToList();// экономия колич запросов
+            var gameDTO = Mapper.Map<IList<Game>, IList<GameDTO>>(game);
+            return gameDTO;
+            //var genreDTOs = Mapper.Map<IList<Genre>, IList<GenreDTO>>(genre);
+            //return genreDTOs.First(g => g.Id == genreId).Games.ToList();
         }
         public GameDTO GetGameByKey(string key)
         {
-            //Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
-            //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
             var games = _database.Game.GetAll().ToList();
             var gameDTOs = Mapper.Map<IList<Game>, IList<GameDTO>>(games);
             return gameDTOs.FirstOrDefault(g=>g.Key==key);
         }
         public IList<GameDTO> GetGameByPlatformType(int platformTypeId)
         {
-          //  AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<PlatformType, PlatformTypeDTO>());
             var PfTDTOs = AutoMapper.Mapper.Map<IEnumerable<PlatformType>, IEnumerable<PlatformTypeDTO>>(_database.PlatformType.GetAll());
             return PfTDTOs.First(g => g.Id == platformTypeId).Games.ToList();
         }
-        public IList<GameDTO> GetGames(/*List<int> genres = null, List<int> platforms = null*/)
+        ////////////////////////////////////////////////
+        public  Expression<Func<Game, bool>> GenreListContainsInGame(List<int> genresId)
         {
-            //Expression<Func<Game, bool>> predicate;
-            //Func<Game, bool> predicate2 = g => g.Key != "nfs";
-            //var genres = _database.Genre.GetAll().ToList();
+            var predicate = PredicateBuilder.False<Game>();
+            Genre genre;
+            foreach (var item in genresId)
+            {
+                genre = _database.Genre.Get(item);
 
-            //if (genres != null)
-            //{
-            //    predicate.And(x => x.Genres.Contains(g => genres.All()));
-            //}
 
-            //if (platfoms != null)
-            //{
-            //    predicate.And(x => x.Genres.Contains(g => genres.All()));
-            //}
+                predicate = predicate.Or(g => g.Genres.Contains(genre));
+            }
+            return predicate;
+        }
+        public IList<GameDTO> GetGames(List<int> genres = null/* , List<int> platforms = null*/)
+        {
+            List<Game> games;
+            if (genres==null /*&& platforms==null*/)
+            {
+                games = _database.Game.GetAll().ToList();
+            }
+            else
+            {
+                //Expression<Func<Game, bool>> predicate = GenreListContainsInGame(genres);
+                var predicate = PredicateBuilder.False<Game>();
+                predicate = predicate.Or(x => genres.Any(val => x.Genres.Any(g => g.Id == val)));
+                //platforms.Add(1);
 
-            //Mapper.Initialize(cfg => cfg.CreateMap<Game, GameDTO>());
-            //var gameDTOs = Mapper.Map<IEnumerable<Game>, IEnumerable<GameDTO>>(_database.Game.GetAll());
-            var games = _database.Game.GetAll().ToList();
-            //var filtered = games.Where(predicate2).ToList();
+
+               // Expression.OrElse(x => genres.Contains(x.Id), x => genres.Contains(x.Id));
+                //games = _database.Game.GetAll(x => x.Id == 4).ToList();
+                games = _database.Game.GetAll(predicate).ToList();
+            }
             var gameDTOs = Mapper.Map<List<GameDTO>>(games);
-            //var gameDTOs = Mapper.Map<List<GameDTO>>(games);
+
             return gameDTOs;
         }
 

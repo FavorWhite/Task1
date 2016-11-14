@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.List<GameStore.BLL.DTO.GameDTO>
+﻿
 
 @{
     ViewBag.Title = "Game List";
@@ -7,9 +7,11 @@
 <div class="main-content row">
     <div class="col-md-8">
         <h2>Games List </h2>
-        <div class="game-list row">
+        <div class="game-list row" id="game-list">
+            
+            @Html.Action("GetGames","Games")
 
-            @foreach (var game in Model)
+            @*@foreach (var game in Model)
             {
                 <figure class="col-md-12 game-item">
                     <a href="#">
@@ -23,7 +25,7 @@
                         <button class="add-tocard-btn">Add</button>
                     </a>
                 </figure>
-            }
+            }*@
 
         </div>
 

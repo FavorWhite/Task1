@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GameStore.DAL.Entities;
@@ -19,9 +20,13 @@ namespace GameStore.DAL.Repositories
             this.db = context;
         }
 
-        public IEnumerable<Game> GetAll()
+        public IEnumerable<Game> GetAll(Expression<Func<Game, bool>> predicate=null)
         {
-            return db.Games;
+            if (predicate==null)
+            {
+                return db.Games;
+            }
+            return db.Games.Where(predicate);
         }
 
         public Game Get(int id)

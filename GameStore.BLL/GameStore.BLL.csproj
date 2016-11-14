@@ -72,6 +72,10 @@
       <Project>{72fbd404-36e7-4888-ae33-73111a4a52cb}</Project>
       <Name>GameStore.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{6bd45070-04c1-4cda-8143-45ce439ca2c9}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

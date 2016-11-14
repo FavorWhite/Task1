@@ -9,7 +9,7 @@ namespace GameStore.BLL.Interfaces
         void EditGame(GameDTO gameDTO);
         void DeleteGame(int id);
         GameDTO GetGameByKey(string key);
-        IList<GameDTO> GetGames();
+        IList<GameDTO> GetGames(List<int> genres = null);
         void AddComment(CommentDTO commentDTO);
         IList<CommentDTO> GetCommentsByGameKey(string gameKey);
         IList<GameDTO> GetGameByGenre(int genreId);

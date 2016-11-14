@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GameStore.DAL.Entities;
@@ -19,7 +20,7 @@ namespace GameStore.DAL.Repositories
             this.db = context;
         }
 
-        public IEnumerable<PlatformType> GetAll()
+        public IEnumerable<PlatformType> GetAll(Expression<Func<PlatformType, bool>> predicate = null)
         {
             return db.PlatformTypes;
         }

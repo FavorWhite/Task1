@@ -191,6 +191,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Configuration\MappingViewProfile.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +200,7 @@
     <Compile Include="Models\AddCommentModel.cs" />
     <Compile Include="Models\AddGameModel.cs" />
     <Compile Include="Models\GenreModel.cs" />
+    <Compile Include="Models\GenreModelViewForFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
   </ItemGroup>
@@ -210,8 +212,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Banners.cshtml" />
+    <Content Include="Views\Games\CreateGame.cshtml" />
     <None Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Shared\_GenreList.cshtml" />
+    <Content Include="Views\Shared\_Games.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -227,6 +231,10 @@
     <ProjectReference Include="..\GameStore.BLL\GameStore.BLL.csproj">
       <Project>{a49173c7-248d-47c2-aba0-9a0896a981e7}</Project>
       <Name>GameStore.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{6bd45070-04c1-4cda-8143-45ce439ca2c9}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
